@@ -1,0 +1,6 @@
+/**
+ *
+ * @module     theme_mb2nl
+ * @copyright  2017 - 2021 Mariusz Boloz (https://mb2themes.com)
+ * @license    Commercial https://themeforest.net/licenses
+ */ define(["jquery","core/chartjs"],function(t,a){var e=function(t){return t.split(",")};return{dashboardChart:function(o){console.log(o);var l=t("#"+o.id),i={labels:e(o.labels),datasets:[{data:e(o.dataset),backgroundColor:["#0077B6","#39D08A"],hoverBackgroundColor:["#0077B6","#39D08A"],borderWidth:0,borderRadius:3}]},d={type:o.type,data:i,options:{maintainAspectRatio:!1,showDatapoints:!0,scales:{x:{grid:{display:!1}},y:{grid:{display:!1}}},plugins:{title:{display:!0,text:"Teachers"},tooltip:{enabled:!0,displayColors:!1,titleMarginBottom:0,titleAlign:"center",bodyAlign:"center"},legend:{display:!1},datalabels:{enabled:!0,display:!0,anchor:"end",align:"top",formatter:Math.round,font:{weight:"bold",size:16}}}}};a.defaults.font.family="Roboto",a.defaults.font.weight=400,a.defaults.font.size=o.fontsize,a.defaults.color="#000",chart=new a(l,d)}}});

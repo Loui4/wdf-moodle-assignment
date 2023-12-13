@@ -1,0 +1,163 @@
+<?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ *
+ * @package   theme_mb2nl
+ * @copyright 2017 - 2022 Mariusz Boloz (mb2moodle.com)
+ * @license   Commercial https://themeforest.net/licenses
+ *
+ */
+
+defined('MOODLE_INTERNAL') || die();
+
+$settings = theme_mb2nl_enrolment_options();
+$reviews = theme_mb2nl_is_review_plugin();
+$updatedate = theme_mb2nl_course_updatedate();
+$coursedate = theme_mb2nl_theme_setting( $PAGE,'coursedate' );
+$ecinstructor = theme_mb2nl_theme_setting( $PAGE,'ecinstructor' );
+$coursecontext = context_course::instance( $COURSE->id );
+$courserating = '';
+$imgcls = ' noimg';
+$herostyle = '';
+
+$slogan = theme_mb2nl_course_intro(NULL, $settings);
+$headerstyle = theme_mb2nl_headerstyle();
+$headercolorscheme = theme_mb2nl_mb2fields_filed('mb2scheme') ? theme_mb2nl_mb2fields_filed('mb2scheme') : theme_mb2nl_theme_setting($PAGE, 'headercolorscheme');
+$shemecls = $headerstyle === 'transparent_light' || ( $headercolorscheme === 'light' && $headerstyle !== 'transparent' ) ?
+' light' : ' dark';
+$metadcls = theme_mb2nl_bsfcls(2,'','','center');
+
+if ( theme_mb2nl_get_enroll_hero_url() )
+{
+	$herostyle = ' data-bg="' . theme_mb2nl_get_enroll_hero_url() . '"';
+	$imgcls = ' isimg lazy';
+}
+
+if ( $reviews )
+{
+	if ( ! class_exists( 'Mb2reviewsHelper' ) )
+	{
+		require_once( $CFG->dirroot . '/local/mb2reviews/classes/helper.php' );
+	}
+
+	$courserating = Mb2reviewsHelper::course_rating($COURSE->id);
+}
+
+?>
+<div class="course-header<?php echo $shemecls . $imgcls; ?>"<?php echo $herostyle; ?>>
+	<div class="inner">
+		<div class="row-topgap"></div>
+		<div class="header-content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="course-info1">
+							<?php echo theme_mb2nl_categories_tree( $COURSE->category ); ?>
+							<h1 class="course-heading hsize-2"><?php echo format_text($COURSE->fullname, FORMAT_HTML) . theme_mb2nl_course_edit_link(); ?></h1>
+							<?php if ( $slogan ) : ?>
+								<div class="course-slogan"><?php echo $slogan; ?></div>
+							<?php endif; ?>
+							<div class="course-meta1">
+								<?php if ( theme_mb2nl_is_bestseller( $coursecontext->id, $COURSE->category ) ) : ?>
+									<span class="bestseller-flag<?php echo $metadcls; ?>"><?php echo get_string( 'bestseller', 'local_mb2builder' ); ?></span>
+								<?php endif; ?>
+								<?php if ( $courserating ) : ?>
+									<a href="#course-ratings" aria-controls="course_nav_reviews_content" class="out-navitem<?php echo $metadcls; ?>">
+										<div class="course-rating">
+											<span class="ratingnum"><?php echo $courserating; ?></span>
+											<?php echo Mb2reviewsHelper::rating_stars($COURSE->id, false, 'sm'); ?>
+											<span class="ratingcount">(<?php
+											echo get_string('ratingscount', 'local_mb2reviews', array('ratings'=>Mb2reviewsHelper::course_rating_count($COURSE->id) ) ); ?>)</span>
+										</div>
+									</a>
+								<?php endif; ?>
+								<span class="course-students<?php echo $metadcls; ?>"><?php echo
+								get_string('teacherstudents', 'theme_mb2nl', array('students'=>theme_mb2nl_get_sudents_count())); ?></span>
+								<?php if ( $updatedate ) : ?>
+									<span class="course-updated<?php echo $metadcls; ?>">
+										<?php echo $updatedate; ?>
+									</span>
+								<?php endif; ?>
+							</div>
+							<?php if ( $ecinstructor ) : ?>
+							<div class="course-meta2">
+								<a href="#course-instructors" aria-controls="course_nav_instructors_content" class="out-navitem<?php echo $metadcls; ?>">
+									<?php echo theme_mb2nl_course_list_teachers( $COURSE->id, array( 'image' => 1 ) ); ?>
+								</a>
+							</div>
+							<?php endif; ?>
+							<div class="course-mobile-info">
+								<?php echo theme_mb2nl_block_enrol(true); ?>
+							</div>
+						</div>						
+					</div>
+				</div>
+				</div>
+				<?php echo $OUTPUT->theme_part('course_enrol_nav'); ?>			
+		</div>
+	</div>
+</div>
+<div class="course-details">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-9 enrol-contentcol">
+				<?php echo $OUTPUT->theme_part('course_enrol_content'); ?>				
+				<div id="main-content">
+					<section id="region-main" class="content-col">
+						<div id="page-content">
+							<?php echo $OUTPUT->main_content(); ?>
+						</div>
+					</section>
+				</div>
+			</div>
+			<div class="col-lg-3 enrol-sidebar">
+				<div class="sidebar-inner">
+					<div class="fake-block block-video">
+						<div class="video-banner lazy" data-bg="<?php echo theme_mb2nl_course_image_url($COURSE->id, true); ?>">
+							<?php echo theme_mb2nl_course_video_lightbox(); ?>
+						</div>
+					</div>
+					<div class="fake-block block-enrol">
+						<?php echo theme_mb2nl_block_enrol(); ?>
+					</div>
+					<div class="fake-block block-custom-fields">
+						<?php echo theme_mb2nl_course_fields( $COURSE->id, false ); ?>
+					</div>
+					<?php //if ( $COURSE->format !== 'singleactivity' ) : ?>
+						<div class="fake-block block_activities">
+							<h4 class="block-heading"><?php echo get_string( 'headingactivities', 'theme_mb2nl' ); ?></h4>
+							<?php echo theme_mb2nl_activities_list(); ?>
+						</div>
+					<?php //endif; ?>
+					<?php echo theme_mb2nl_course_tags_block($COURSE->id); ?>
+					<?php if ( $settings->shareicons ) : ?>
+						<div class="fake-block block-shares">
+							<h4 class="block-heading"><?php echo get_string( 'headingsocial', 'theme_mb2nl' ); ?></h4>
+							<?php echo theme_mb2nl_course_share_list( $COURSE->id, format_text($COURSE->fullname, FORMAT_HTML) ); ?>
+						</div>
+					<?php endif; ?>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<?php echo $OUTPUT->blocks('side-pre', theme_mb2nl_block_cls($PAGE, 'side-pre')); ?>
+<?php echo $OUTPUT->standard_after_main_region_html(); ?>
+<?php echo $OUTPUT->theme_part('region_adminblock'); ?>
+<?php echo $OUTPUT->theme_part('region_bottom'); ?>
+<?php echo $OUTPUT->theme_part('region_bottom_abcd'); ?>
+<?php echo $OUTPUT->theme_part('footer', array('sidebar'=> 0)); ?>

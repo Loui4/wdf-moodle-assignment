@@ -1,0 +1,79 @@
+
+:root {
+    // Variables for acsb
+    --mb2-pb-color_white: #fff;
+    --mb2-pb-textcolorondark: #{$textcolorondark};
+    --mb2-pb-readablefont: Arial, Helvetica, sans-serif;
+    --mb2-pb-fwgeneral: #{$fwgeneral3};
+    --mb2-pb-fwheadings: #{$fwheadings3};
+    --mb2-pb-bigcursor: url([[pix:theme|bigblackcursor]]), default;
+    --mb2-pb-bigpointer: url([[pix:theme|bigblackpointer]]), default;
+    --mb2-pb-lhgeneral: #{$lhgeneral};
+    //--mb2-pb-lhsmall: #{$fssmall_lh};
+    --mb2-pb-lhheadings: #{$lhheadings}; 
+    --mb2-acsb-color: #001e62;      
+
+    // General variables
+    --mb2-pb-bordercolor: rgba(0,0,0,.1);
+    --mb2-pb-btn-bghcolor: #{darken($btncolor,6%)};
+    --mb2-pb-acc-tcolor: var(--mb2-pb-headingscolor);
+    --mb2-pb-acc-thcolor: var(--mb2-pb-headingscolor);
+    --mb2-pb-color_gray2: #{$color_gray2};
+    --mb2-pb-acc-color_gray2: var(--mb2-pb-color_gray2);
+
+    // Font size
+    --mb2-pb-fssmall: #{$fssmall};
+    --mb2-pb-fsxsmall: #{$fsxsmall};
+
+    // Navigation
+    --mb2-pb-navbarbgcolor: #{$accent2};
+    --mb2-pb-navcolor: var(--mb2-pb-headingscolor);
+    --mb2-pb-navsubcolor: var(--mb2-pb-textcolor_lighten);
+	--mb2-pb-navhcolor: var(--mb2-pb-navcolor);
+    --mb2-pb-navsubhcolor: var(--mb2-pb-navsubcolor);
+	--mb2-pb-navhbgcolor: rgba(0,0,0,.04);
+
+    // Font icons
+    --fa-style-family__theme: 'FontAwesome';
+    --fa-style-style__theme: normal;
+    --fa-style-variant__theme: normal;
+    --fa-style-weight__theme: normal;
+    --fa-style-size__theme: inherit;
+    --fa-style-lineheight__theme: 1;
+
+    // Page header gradient
+    --mb2-pb-pheadergrad1: var(--mb2-pb-headerbgcolor);
+    --mb2-pb-pheadergrad2: var(--mb2-pb-headerbgcolor);
+
+    // Spinner
+    --mb2-pb-spinner: #{$spinner};
+
+    // Top bar height
+    --mb2-topbarh: 2.4rem;
+
+    // Social icons
+    --mb2-social-size: 30px;
+    --mb2-social-space: 6px;
+    --mb2-social-color: var(--mb2-pb-headingscolor);
+    --mb2-social-bgcolor: transparent;
+    --mb2-social-borcolor: var(--mb2-social-color);
+    --mb2-social-hcolor: #fff;
+    --mb2-social-hbgcolor: var(--mb2-social-color);
+    --mb2-social-hborcolor: var(--mb2-social-color);
+
+
+}
+
+/* ======================= VARIABLES FOR MOODLE 4.2+ */
+
+// Font Awesome style
+.css_hy9f {
+    --fa-style-family__theme: 'Font Awesome 6 Free';
+    --fa-style-weight__theme: 900;
+    --fa-style-size__theme: 14px;
+}
+
+// Gradient background 
+.tpheader_gradient {
+    --mb2-pb-pheadergrad2: var(--mb2-pb-headerbgcolor2);
+}
