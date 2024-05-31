@@ -1,0 +1,108 @@
+.card {
+  border-radius: 10px;
+}
+
+.list-group-item {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.navbar {
+  background-color: #002966 !important;
+  padding-top: 30px !important;
+  padding-bottom: 30px !important;
+  color: #fff !important;
+
+  .login {
+    a {
+        padding: 10px !important;
+        color: white !important;
+        border-radius: 10px;
+        border: solid 1px #fff;
+    }
+  }
+
+
+//   .d-inline-block {
+//     display: none;
+//   }
+}
+
+.usernav {
+  // color: #fff !important;
+}
+
+.fa-bell,
+.fa-comment,
+.usertext {
+  color: #fff !important;
+}
+
+.site-name {
+  color: #fff;
+  font-size: 5vh;
+  line-height: 5vh;
+  text-transform: capitalize;
+}
+
+.block_recentlyaccessedcourses,
+.block_myoverview {
+  background-color: #e6f0ff !important;
+  border-style: none;
+}
+
+#page-footer {
+background-color: #002966 !important;
+  a,
+  .logininfo {
+    color: #a9a9a9 !important;
+  }
+}
+
+#nav-drawer {
+    background-color: #F7F7F7 !important;   
+}
+.list-group-item {
+  border-style: none !important;
+  background-color: #F7F7F7 !important;
+  
+
+  &:hover {
+    background-color: #D3D3D3 !important;
+  }
+}
+.list-group-item.active {
+    background-color: #A9A9A9 !important;
+}
+
+header {
+    .card {
+        background-color: #F7F7F7 important;
+    }
+}
+
+
+#page-login-index {
+    .card {
+        border-style: none !important;
+        .card-header{
+            background-color: #fff;
+            font-size: 5vh;
+            line-height: 5vh;
+        }
+        .card-body {
+            .row.justify-content-md-center{
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: center !important;  
+            }
+        }
+    }
+}
+
+#loginguestbtn {
+    background-color: #f2f2f2;
+    color: #001f4d;
+    border-style: none !important;
+}

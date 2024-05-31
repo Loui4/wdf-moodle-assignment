@@ -10,7 +10,7 @@ class block_coursestats extends block_base
 
     public function get_content()
     {
-        global $CFG, $USER, $DB;
+        global $CFG, $USER, $DB, $OUTPUT;
         if ($this->content !== null) {
             return $this->content;
         }
@@ -40,8 +40,10 @@ class block_coursestats extends block_base
 
         $table .= "</tbody></table>";
 
-        $this->content->text = $table;
-        $this->content->footer = 'footer';
+        // $this->content->text = $table;
+        // $this->content->footer = 'footer';
+        $records['data'] = array_values($result);
+        $this->content->text = $OUTPUT->render_from_template('block_coursestats/table', $records);
         return $this->content;
     }
 }
